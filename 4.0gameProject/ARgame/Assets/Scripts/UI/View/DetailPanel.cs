@@ -42,7 +42,7 @@ namespace UI
                 //
                 // OnExit();
                 // TODO: 跳转到MainScene
-                SceneSystem.SetScene(new MainScene());
+                GameManager.Instance.SceneSystem.SetScene(new MainScene());
             });
         }
 

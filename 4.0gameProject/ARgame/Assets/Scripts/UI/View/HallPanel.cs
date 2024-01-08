@@ -5,7 +5,6 @@ namespace UI
     public class HallPanel : UIBase
     {
         private ChoosePanelModel _model;
-        private SceneSystem SceneSystem =  new SceneSystem();
 
         public HallPanel()
         {
@@ -20,7 +19,7 @@ namespace UI
             UITool.AddClickEvent("BagButton", () => UIManager.PushUI(new BagPanel()));
             UITool.AddClickEvent("MapButton", () =>
             {
-                SceneSystem.SetScene(new MapScene());
+                GameManager.Instance.SceneSystem.SetScene(new MapScene());
             });
         }
     }

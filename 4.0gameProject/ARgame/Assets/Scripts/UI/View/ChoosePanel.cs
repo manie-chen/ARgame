@@ -23,34 +23,14 @@ namespace UI
             {
                 GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Character/UICharacter"));
                 UITool.AddChildItem<UICharacterModel>(content, newItem);
-                // _model._characterModels.Add(new UICharacterModel());
             }
             UITool.AddClickEvent(content, () =>
             {
-                OnPause();
                 var detailPanelModel = new DetailPanelModel();
                 detailPanelModel._isDetail = false;
                 var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.TOP, detailPanelModel) as DetailPanel;
-                // if(panel != null && panel._model._isExit)
-                //     OnResume();
-                
             });
         }
-        
-        public override void OnPause()
-        {
-            base.OnPause();
-            
-            UITool.HideGameObject("ChoosePanel(Clone)");
-        }
-        
-        public override void OnResume()
-        {
-            base.OnResume();
-            UITool.ShowGameObject("ChoosePanel(Clone)");
-        }
-        
-        
     }
     
     public class ChoosePanelModel : UIModelBase

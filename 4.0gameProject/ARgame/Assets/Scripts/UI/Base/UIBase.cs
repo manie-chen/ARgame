@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class UIBase 
+    public class UIBase
     {
         public string UIPath { get; set; }
         
