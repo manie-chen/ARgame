@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,9 +34,17 @@ namespace UI
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public GameObject FindChildGameObject(string name)
+        public GameObject FindChildGameObject(string name, GameObject obj = null)
         {
-            Transform[] trans = _nowPanel.GetComponentsInChildren<Transform>();
+            Transform[] trans;
+            if (obj == null)
+            {
+                trans = _nowPanel.GetComponentsInChildren<Transform>();
+            }
+            else
+            {
+                trans = obj.GetComponentsInChildren<Transform>();
+            }
             foreach (var item in trans)
             {
                 if (item.name == name)
@@ -53,9 +62,9 @@ namespace UI
         /// <param name="name"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T GetOrAddComponentInChildren<T>(string name) where T :Component
+        public T GetOrAddComponentInChildren<T>(string name, GameObject obj) where T :Component
         {
-            GameObject child = FindChildGameObject(name);
+            GameObject child = FindChildGameObject(name, obj);
             if (child)
             {
                 if (child.GetComponent<T>() == null)
@@ -75,9 +84,9 @@ namespace UI
         /// </summary>
         /// <param name="name"></param>
         /// <param name="action"></param>
-        public void AddClickEvent(string name, Action action)
+        public void AddClickEvent(string name, Action action, GameObject obj = null)
         {
-            GetOrAddComponentInChildren<Button>(name).onClick.AddListener(() =>
+            GetOrAddComponentInChildren<Button>(name, obj).onClick.AddListener(() =>
             {
                 action?.Invoke();
             });
@@ -86,7 +95,7 @@ namespace UI
         /// <summary>
         /// 添加子对象
         /// </summary>
-        public void AddChildItem<T>(string name, GameObject child) where T : UIModelBase
+        public void AddChildItem(string name, GameObject child)
         {
             GameObject parent = FindChildGameObject(name);
             if (parent)
@@ -120,6 +129,17 @@ namespace UI
             {
                 child.SetActive(true);
             }
+        }
+
+        /// <summary>
+        /// 绑定text数据
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="obj"></param>
+        /// <param name="text"></param>
+        public void BindText(string name, GameObject obj, string text)
+        {
+            FindChildGameObject(name, obj).gameObject.GetComponent<Text>().text = text;
         }
         
     }

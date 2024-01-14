@@ -1,6 +1,8 @@
-﻿namespace UI
+﻿using UnityEngine;
+
+namespace UI
 {
-    public class UIModelBase
+    public class UIModelBase : Component
     {
         public bool _isExit = false;
 

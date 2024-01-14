@@ -5,7 +5,6 @@ namespace UI
     public class DetailPanel :UIBase
     {
         private DetailPanelModel _model;
-        private SceneSystem SceneSystem =  new SceneSystem();
 
         public DetailPanel()
         {

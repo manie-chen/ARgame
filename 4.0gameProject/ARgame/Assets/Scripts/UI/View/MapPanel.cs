@@ -1,4 +1,6 @@
-﻿namespace UI
+﻿using SceneSys;
+
+namespace UI
 {
     public class MapPanel : UIBase
     {
@@ -13,7 +15,9 @@
         public override void OnEnter()
         {
             base.OnEnter();
-            UITool.AddClickEvent("BtnExit", () => UIManager.PopUI());
+            UITool.AddClickEvent("BtnExit", () => GameManager.Instance.SceneSystem.SetScene(new MainScene()));
+            UITool.AddClickEvent("PVPBtn",() => GameManager.Instance.SceneSystem.SetScene(new FightScene()));
+            UITool.AddClickEvent("PVEBtn",() => GameManager.Instance.SceneSystem.SetScene(new FightScene()));
         }
     }
 

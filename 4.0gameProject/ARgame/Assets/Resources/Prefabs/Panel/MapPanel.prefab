@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 3184576037232562414}
   - component: {fileID: 4229026232726044257}
   m_Layer: 5
-  m_Name: feedBtn
+  m_Name: PVEBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 5952737708775510930}
   - component: {fileID: 6359159279345969807}
   m_Layer: 5
-  m_Name: workBtn
+  m_Name: PVPBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

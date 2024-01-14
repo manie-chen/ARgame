@@ -10,9 +10,20 @@ namespace UI
         
         public UIModelBase UIModel { get; set; }
         
+        public UIType Type { get; set; }
+        
         public UIBase()
         {
             
+        }
+        
+        /// <summary>
+        /// 界面或者界面內的子物体
+        /// </summary>
+        public enum UIType
+        {
+            PANEL,
+            ITEM
         }
         
         public UITool UITool { get; private set; }

@@ -17,7 +17,6 @@ namespace UI
     /// </summary>
     public class UIManager
     {
-
         /// <summary>
         /// 当前存在的界面
         /// </summary>
