@@ -7,7 +7,6 @@ namespace UI
     public class ChoosePanel : UIBase
     {
         private ChoosePanelModel _model;
-        private string content;
         
         public ChoosePanel()
         {
@@ -19,28 +18,20 @@ namespace UI
         public override void OnEnter()
         {
             _model._characterCount = 5;
-            content = "Content";
             while (_model._characterCount-- > 0)
             {
-                GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Character/UICharacter"));
-                UITool.AddChildItem(content, newItem);
+                GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ItemUI/Character/UICharacter"));
+                UITool.AddChildItem("Content", newItem);
                 // 填充数据
-                newItem.AddComponent<UICharacterModel>();
                 UITool.BindText("Name", newItem, "dog");
                 UITool.AddClickEvent(newItem.name, () =>
                 {
                     Debug.Log("1111");
                     var detailPanelModel = new DetailPanelModel();
                     detailPanelModel._isDetail = false;
-                    var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.TOP, detailPanelModel) as DetailPanel;
+                    var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.LAYER_TOP, detailPanelModel) as DetailPanel;
                 }, newItem);
             }
-            // UITool.AddClickEvent(content, () =>
-            // {
-            //     var detailPanelModel = new DetailPanelModel();
-            //     detailPanelModel._isDetail = false;
-            //     var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.TOP, detailPanelModel) as DetailPanel;
-            // });
         }
     }
     

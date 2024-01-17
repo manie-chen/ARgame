@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +9,7 @@ namespace UI
     /// </summary>
     public class UITool
     {
-        private GameObject _nowPanel;
+        public GameObject _nowPanel;
         
         public UITool(GameObject panel)
         {

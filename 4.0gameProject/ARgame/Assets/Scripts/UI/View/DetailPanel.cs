@@ -1,4 +1,5 @@
 ﻿using SceneSys;
+using UnityEngine;
 
 namespace UI
 {
@@ -8,7 +9,6 @@ namespace UI
 
         public DetailPanel()
         {
-            _model = new DetailPanelModel();
             UIPath = "Prefabs/Panel/DetailPanel";
             UIName = "DetailPanel";
         }
@@ -16,15 +16,46 @@ namespace UI
         public override void OnEnter()
         {
             base.OnEnter();
+            _model = UIModel as DetailPanelModel;
 
+            if(_model == null) return;
+            
             // TODO: 根据model的值来显示不同的界面
             if (_model._isDetail)
             {
+                UITool.HideGameObject("confirmBtn");
                 
+                UITool.AddClickEvent("workBtn", () =>
+                {
+                    GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ItemUI/TipItem"));
+                    var tip = new UITipItemModel();
+                    tip.tipText = "工作中...";
+                    UIManager.PushUI(new UITipItem(), layer: UILayer.LAYER_TOP, tip);
+                });
+                
+                UITool.AddClickEvent("feedBtn", () =>
+                {
+                    GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ItemUI/TipItem"));
+                    var tip = new UITipItemModel();
+                    tip.tipText = "投喂中...";
+                    UIManager.PushUI(new UITipItem(), layer: UILayer.LAYER_TOP, tip);
+                });
+                UITool.AddClickEvent("interactBtn", () =>
+                {
+                    GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ItemUI/TipItem"));
+                    var tip = new UITipItemModel();
+                    tip.tipText = "互动中...";
+                    UIManager.PushUI(new UITipItem(), layer: UILayer.LAYER_TOP, tip);
+                });
             }
             else
             {
+                UITool.AddClickEvent("confirmBtn", () =>
+                {
+                    GameManager.Instance.SceneSystem.SetScene(new MainScene());
+                });
                 
+                UITool.HideGameObject("growType");
             }
             
             UITool.AddClickEvent("BtnExit", () =>
@@ -32,16 +63,6 @@ namespace UI
                 UIManager.PopUI();
                 _model._isExit = true;
                 OnExit();
-            });
-            
-            UITool.AddClickEvent("confirmBtn", () =>
-            {
-                // UIManager.PopUI();
-                // _model._isExit = false;
-                //
-                // OnExit();
-                // TODO: 跳转到MainScene
-                GameManager.Instance.SceneSystem.SetScene(new MainScene());
             });
         }
 

@@ -21,6 +21,12 @@ namespace UI
             {
                 GameManager.Instance.SceneSystem.SetScene(new MapScene());
             });
+            UITool.AddClickEvent("UICharacter", () =>
+            {
+                var detailPanelModel = new DetailPanelModel();
+                detailPanelModel._isDetail = true;
+                var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.LAYER_TOP, detailPanelModel) as DetailPanel;
+            });
         }
     }
     

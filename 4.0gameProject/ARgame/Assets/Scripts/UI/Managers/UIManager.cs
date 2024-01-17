@@ -8,9 +8,10 @@ namespace UI
     /// </summary>
     public enum UILayer
     {
-        TOP,
-        MID,
-        BOTTOM
+        LAYER_TIP,
+        LAYER_TOP,
+        LAYER_MID,
+        LAYER_BOTTOM
     }
     /// <summary>
     /// 储存所有UI信息
@@ -71,7 +72,7 @@ namespace UI
         /// 暂停当前面板，入栈新面板并显示
         /// </summary>
         /// <param name="nextPanel"></param>
-        public UIBase PushUI(UIBase nextPanel,UILayer layer = UILayer.TOP,UIModelBase uiModel = null)
+        public UIBase PushUI(UIBase nextPanel,UILayer layer = UILayer.LAYER_TOP,UIModelBase uiModel = null)
         {
             if (StackPanel.Count > 0)
             {
