@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,25 +17,21 @@ namespace SceneSys
         /// 场景名字
         /// </summary>
         public string SceneName { get; set; }
-    
-        /// <summary>
-        /// 跟随场景弹出的UI界面
-        /// </summary>
-        // public UIBase FirstUI { get; set; }
 
         public BaseScene()
         {
             UIManager = new UIManager();
         }
 
-        public virtual void OnEnter()
+        public virtual async UniTask OnEnter()
         {
             // 加载的是新场景
             if (SceneManager.GetActiveScene().name != SceneName)
             {
-                SceneManager.LoadScene(SceneName);
                 // 加载完成后通知
                 SceneManager.sceneLoaded += SceneLoaded;
+                
+                await SceneManager.LoadSceneAsync(SceneName);
             }
             else
             {
@@ -65,7 +62,7 @@ namespace SceneSys
             // UIManager.PopAllUI();
         }
     
-        public virtual void SceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode load)
+        public virtual void SceneLoaded(Scene scene, LoadSceneMode load)
         {
             InitLayer();
             Debug.Log($"加载{SceneName}场景");

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class UIBase 
+    public class UIBase
     {
         public string UIPath { get; set; }
         
@@ -10,9 +10,20 @@ namespace UI
         
         public UIModelBase UIModel { get; set; }
         
+        public UIType Type { get; set; }
+        
         public UIBase()
         {
             
+        }
+        
+        /// <summary>
+        /// 界面或者界面內的子物体
+        /// </summary>
+        public enum UIType
+        {
+            PANEL,
+            ITEM
         }
         
         public UITool UITool { get; private set; }

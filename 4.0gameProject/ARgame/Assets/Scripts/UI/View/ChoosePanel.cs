@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
     public class ChoosePanel : UIBase
     {
         private ChoosePanelModel _model;
-        private string content;
         
         public ChoosePanel()
         {
@@ -18,39 +18,21 @@ namespace UI
         public override void OnEnter()
         {
             _model._characterCount = 5;
-            content = "Content";
             while (_model._characterCount-- > 0)
             {
-                GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Character/UICharacter"));
-                UITool.AddChildItem<UICharacterModel>(content, newItem);
-                // _model._characterModels.Add(new UICharacterModel());
+                GameObject newItem = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ItemUI/Character/UICharacter"));
+                UITool.AddChildItem("Content", newItem);
+                // 填充数据
+                UITool.BindText("Name", newItem, "dog");
+                UITool.AddClickEvent(newItem.name, () =>
+                {
+                    Debug.Log("1111");
+                    var detailPanelModel = new DetailPanelModel();
+                    detailPanelModel._isDetail = false;
+                    var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.LAYER_TOP, detailPanelModel) as DetailPanel;
+                }, newItem);
             }
-            UITool.AddClickEvent(content, () =>
-            {
-                OnPause();
-                var detailPanelModel = new DetailPanelModel();
-                detailPanelModel._isDetail = false;
-                var panel = UIManager.PushUI(new DetailPanel(), layer: UILayer.TOP, detailPanelModel) as DetailPanel;
-                // if(panel != null && panel._model._isExit)
-                //     OnResume();
-                
-            });
         }
-        
-        public override void OnPause()
-        {
-            base.OnPause();
-            
-            UITool.HideGameObject("ChoosePanel(Clone)");
-        }
-        
-        public override void OnResume()
-        {
-            base.OnResume();
-            UITool.ShowGameObject("ChoosePanel(Clone)");
-        }
-        
-        
     }
     
     public class ChoosePanelModel : UIModelBase
